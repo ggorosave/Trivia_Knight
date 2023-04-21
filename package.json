@@ -1,0 +1,28 @@
+{
+  "name": "trivia_knight",
+  "version": "1.0.0",
+  "description": "A MERN Stack web trivia game",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server --ignore client",
+    "develop": "concurrently \"cd server && run start\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ggorosave/Trivia_Knight.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ggorosave/Trivia_Knight/issues"
+  },
+  "homepage": "https://github.com/ggorosave/Trivia_Knight#readme",
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  }
+}
