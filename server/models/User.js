@@ -31,6 +31,7 @@ const userSchema = new Schema({
         required: true,
         minlength: 8
     },
+    // Change to games
     questions: [questionSchema]
 });
 
