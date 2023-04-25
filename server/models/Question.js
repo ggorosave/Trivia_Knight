@@ -14,14 +14,19 @@ const questionSchema = new Schema({
     incorrect_answers: {
         type: [String]
     },
+    difficulty: {
+        type: String,
+        required: true
+    },
+    type: {
+        type: String,
+        required: true
+    },
     category: {
         type: Schema.Types.ObjectId,
         ref: "Category",
         required: true
     }
-    // Add type and difficulty
 });
 
-const Question = mongoose.model("Question", questionSchema);
-
-module.exports = Question;
+module.exports = questionSchema;
