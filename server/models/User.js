@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 const bcrypt = require("bcrypt");
-const questionSchema = require("./Question")
 
 const userSchema = new Schema({
     firstName: {
@@ -31,7 +30,12 @@ const userSchema = new Schema({
         required: true,
         minlength: 8
     },
-    questions: [questionSchema]
+    games: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Game"
+        }
+    ]
 });
 
 // Uses bcrypt to encrypt password before saving
