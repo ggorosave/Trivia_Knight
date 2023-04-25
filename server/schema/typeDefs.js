@@ -39,6 +39,14 @@ const typeDefs = gql`
         password: String
         games: [Game]
     }
+
+    type Query {
+        categories: [Category]
+        questions(category: ID!) [Question]
+        game(_id: ID!): Game
+        user: User
+        session(_id: ID!): Session
+    }
 `;
 
 module.exports = typeDefs;
