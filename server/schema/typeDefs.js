@@ -47,6 +47,20 @@ const typeDefs = gql`
         user: User
         session(_id: ID!): Session
     }
+
+    type Mutation {
+        addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!)
+        
+        addGame(_id: ID!, title: String!): Game
+        
+        updateGameQuestions(gameId: ID!, question: String!, correct_answer: String!, incorrect_answers: [String]!, difficulty: String!, type: String!, category: ID!)
+
+        updateUser(firstName: String, lastName: String, username: String, email: String, password: String)
+
+        updateQuestion(gameId: ID!, question: String, correct_answer: String, incorrect_answers: [String], difficulty: String, type: String, category: ID)
+
+        login(username: String!, password: String!): Auth
+    }
 `;
 
 module.exports = typeDefs;
