@@ -7,6 +7,9 @@ const resolvers = {
         categories: async () => {
             return await Category.find();
         },
+        game: async (parent, { _id }) => {
+            return Game.findById(_id).populate("questions")
+        }
     }
 };
 
