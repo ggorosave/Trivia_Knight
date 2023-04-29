@@ -18,6 +18,11 @@ const resolvers = {
                     populate: "questions"
                 })
             }
+
+            return user;
+        },
+        session: async (parent, { _id }) => {
+            return Session.findById(_id).populate([{path: 'host'}, {path: 'players'}])
         }
     }
 };

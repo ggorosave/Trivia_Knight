@@ -42,7 +42,6 @@ const typeDefs = gql`
 
     type Query {
         categories: [Category]
-        questions(category: ID!) [Question]
         game(_id: ID!): Game
         user: User
         session(_id: ID!): Session
