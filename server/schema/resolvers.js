@@ -32,7 +32,15 @@ const resolvers = {
 
             return { token, user };
         },
-        
+        addGame: async (parent, { title }, context) => {
+            if (context.user) {
+                const game = await Game.create(title);
+
+                await User.findByIdAndUpdate(context.user._id, { $push: { games: game } });
+
+                return game;
+            }
+        }
     }
 };
 
