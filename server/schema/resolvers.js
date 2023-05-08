@@ -22,7 +22,7 @@ const resolvers = {
             return user;
         },
         session: async (parent, { _id }) => {
-            return Session.findById(_id).populate([{path: 'host'}, {path: 'players'}])
+            return Session.findById(_id).populate([{ path: 'host' }, { path: 'players' }])
         }
     },
     Mutation: {
@@ -40,6 +40,28 @@ const resolvers = {
 
                 return game;
             }
+        },
+        updateGameQuestions: async (parent, { gameId, question, correct_answer, incorrect_answers, difficulty, type, category }, context) => {
+            if (context.user) {
+                const game = await Game.findByIdAndUpdate(
+                    { _id: gameId },
+                    {
+                        $addToSet: {
+                            questions: {
+                                question: question,
+                                correct_answer: correct_answer,
+                                incorrect_answers: [...incorrect_answers],
+                                difficulty: difficulty,
+                                type: type,
+                                category: category
+                            }
+                        }
+                    },
+                    { new: true }
+                );
+            }
+
+            throw new AuthenticationError('You need to be logged in to update your game questions');
         }
     }
 };
