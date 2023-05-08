@@ -24,6 +24,15 @@ const resolvers = {
         session: async (parent, { _id }) => {
             return Session.findById(_id).populate([{path: 'host'}, {path: 'players'}])
         }
+    },
+    Mutation: {
+        addUser: async (parent, args) => {
+            const user = await User.create(args);
+            const token = signToken(user);
+
+            return { token, user };
+        },
+        
     }
 };
 
