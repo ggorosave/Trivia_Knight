@@ -56,7 +56,7 @@ const typeDefs = gql`
 
         updateUser(firstName: String, lastName: String, username: String, email: String, password: String)
 
-        updateQuestion(gameId: ID!, question: String, correct_answer: String, incorrect_answers: [String], difficulty: String, type: String, category: ID)
+        removeQuestion(gameId: ID!, question: String, correct_answer: String, incorrect_answers: [String], difficulty: String, type: String, category: ID)
 
         login(username: String!, password: String!): Auth
     }
