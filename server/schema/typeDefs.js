@@ -50,7 +50,7 @@ const typeDefs = gql`
     type Mutation {
         addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!)
         
-        addGame(_id: ID!, title: String!): Game
+        addGame(title: String!): Game
         
         updateGameQuestions(gameId: ID!, question: String!, correct_answer: String!, incorrect_answers: [String]!, difficulty: String!, type: String!, category: ID!)
 
