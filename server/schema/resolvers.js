@@ -34,7 +34,7 @@ const resolvers = {
         },
         addGame: async (parent, { title }, context) => {
             if (context.user) {
-                const game = await Game.create(title);
+                const game = await Game.create({ title: title });
 
                 await User.findByIdAndUpdate(context.user._id, { $push: { games: game } });
 
@@ -59,6 +59,8 @@ const resolvers = {
                     },
                     { new: true }
                 );
+
+                return game;
             }
 
             throw new AuthenticationError('You need to be logged in to update your game questions');
