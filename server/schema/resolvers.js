@@ -9,7 +9,10 @@ const resolvers = {
             return await Category.find();
         },
         game: async (parent, { _id }) => {
-            return Game.findById(_id).populate("questions")
+            return Game.findById(_id).populate({
+                path: "questions",
+                populate: "category"
+            });
         },
         user: async (parent, args, context) => {
             if (context.user) {
