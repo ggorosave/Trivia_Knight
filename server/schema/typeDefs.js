@@ -40,6 +40,11 @@ const typeDefs = gql`
         games: [Game]
     }
 
+    type Auth {
+        token: ID
+        user: User
+    }
+
     type Query {
         categories: [Category]
         game(_id: ID!): Game
@@ -48,15 +53,17 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!)
+        addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
         
         addGame(title: String!): Game
+
+        addCategory(name: String!): Category
         
-        updateGameQuestions(gameId: ID!, question: String!, correct_answer: String!, incorrect_answers: [String]!, difficulty: String!, type: String!, category: ID!)
+        updateGameQuestions(gameId: ID!, question: String!, correct_answer: String!, incorrect_answers: [String]!, difficulty: String!, type: String!, category: ID!): Game
 
-        updateUser(firstName: String, lastName: String, username: String, email: String, password: String)
+        updateUser(firstName: String, lastName: String, username: String, email: String, password: String): User
 
-        updateQuestion(gameId: ID!, question: String, correct_answer: String, incorrect_answers: [String], difficulty: String, type: String, category: ID)
+        removeQuestion(gameId: ID!, question: String, correct_answer: String, incorrect_answers: [String], difficulty: String, type: String, category: ID): Game
 
         login(username: String!, password: String!): Auth
     }
