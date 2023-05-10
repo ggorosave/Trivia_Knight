@@ -15,11 +15,14 @@ const resolvers = {
             if (context.user) {
                 const user = await User.findById(context.user._id).populate({
                     path: "games",
-                    populate: "questions"
+                    populate: {
+                        path: "questions",
+                        populate: "category"
+                    }
                 })
-            }
 
-            return user;
+                return user;
+            }
         },
         session: async (parent, { _id }) => {
             return Session.findById(_id).populate([{ path: 'host' }, { path: 'players' }])

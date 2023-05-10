@@ -49,7 +49,6 @@ const typeDefs = gql`
         categories: [Category]
         game(_id: ID!): Game
         user: User
-        userAuth(_id: ID): Auth
         session(_id: ID!): Session
     }
 
