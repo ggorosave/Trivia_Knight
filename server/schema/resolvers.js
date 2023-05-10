@@ -54,7 +54,7 @@ const resolvers = {
                 return category;
             }
         },
-        updateGameQuestions: async (parent, { gameId, question, correct_answer, incorrect_answers, difficulty, type, category }, context) => {
+        addGameQuestion: async (parent, { gameId, question, correct_answer, incorrect_answers, difficulty, type, category }, context) => {
             if (context.user) {
                 const game = await Game.findByIdAndUpdate(
                     { _id: gameId },
