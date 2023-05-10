@@ -57,6 +57,8 @@ const typeDefs = gql`
         addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
         
         addGame(title: String!): Game
+
+        addCategory(name: String!): Category
         
         updateGameQuestions(gameId: ID!, question: String!, correct_answer: String!, incorrect_answers: [String]!, difficulty: String!, type: String!, category: ID!): Game
 

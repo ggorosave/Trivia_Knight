@@ -41,6 +41,13 @@ const resolvers = {
                 return game;
             }
         },
+        addCategory: async (parent, { name }, context) => {
+            if (context.user) {
+                const category = await Category.create({ name: name });
+
+                return category;
+            }
+        },
         updateGameQuestions: async (parent, { gameId, question, correct_answer, incorrect_answers, difficulty, type, category }, context) => {
             if (context.user) {
                 const game = await Game.findByIdAndUpdate(
