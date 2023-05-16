@@ -1,7 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Category, Game, Session } = require("../models")
 const { signToken } = require("../utils/auth");
-const { populate } = require("../models/User");
+const { populate, findOne } = require("../models/User");
 
 const resolvers = {
     Query: {
@@ -90,6 +90,23 @@ const resolvers = {
             }
 
             throw new AuthenticationError('Not logged in');
+        },
+        login: async (parent, { username, password }) => {
+            const user = await User.findOne({ username });
+
+            if (!user) {
+                throw new AuthenticationError("Username does not exist");
+            }
+
+            const correctPw = await user.isCorrectPassword(password);
+
+            if (!correctPw) {
+                throw new AuthenticationError("Username and password do not match.");
+            }
+
+            const token = signToken(user);
+
+            return { token, user };
         }
     }
 };
