@@ -91,6 +91,7 @@ const resolvers = {
 
             throw new AuthenticationError('Not logged in');
         },
+    //    updateQuestion?
         login: async (parent, { username, password }) => {
             const user = await User.findOne({ username });
 
