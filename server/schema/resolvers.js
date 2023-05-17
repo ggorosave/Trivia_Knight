@@ -1,7 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Category, Game, Session } = require("../models")
 const { signToken } = require("../utils/auth");
-const { populate } = require("../models/User");
+const { populate, findOne } = require("../models/User");
 
 const resolvers = {
     Query: {
@@ -54,7 +54,7 @@ const resolvers = {
                 return category;
             }
         },
-        updateGameQuestions: async (parent, { gameId, question, correct_answer, incorrect_answers, difficulty, type, category }, context) => {
+        addGameQuestion: async (parent, { gameId, question, correct_answer, incorrect_answers, difficulty, type, category }, context) => {
             if (context.user) {
                 const game = await Game.findByIdAndUpdate(
                     { _id: gameId },
@@ -77,6 +77,37 @@ const resolvers = {
             }
 
             throw new AuthenticationError('You need to be logged in to update your game questions');
+        },
+        updateUser: async (parent, args, context) => {
+
+            if (context.user) {
+
+                return await User.findByIdAndUpdate(
+                    context.user._id,
+                    args,
+                    { new: true }
+                )
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+    //    updateQuestion?
+        login: async (parent, { username, password }) => {
+            const user = await User.findOne({ username });
+
+            if (!user) {
+                throw new AuthenticationError("Username does not exist");
+            }
+
+            const correctPw = await user.isCorrectPassword(password);
+
+            if (!correctPw) {
+                throw new AuthenticationError("Username and password do not match.");
+            }
+
+            const token = signToken(user);
+
+            return { token, user };
         }
     }
 };

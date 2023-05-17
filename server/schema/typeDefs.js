@@ -59,11 +59,13 @@ const typeDefs = gql`
 
         addCategory(name: String!): Category
         
-        updateGameQuestions(gameId: ID!, question: String!, correct_answer: String!, incorrect_answers: [String]!, difficulty: String!, type: String!, category: ID!): Game
+        addGameQuestion(gameId: ID!, question: String!, correct_answer: String!, incorrect_answers: [String]!, difficulty: String!, type: String!, category: ID!): Game
 
         updateUser(firstName: String, lastName: String, username: String, email: String, password: String): User
 
-        removeQuestion(gameId: ID!, question: String, correct_answer: String, incorrect_answers: [String], difficulty: String, type: String, category: ID): Game
+        updateQuestion(gameId: ID!, questionId: ID!, question: String, correct_answer: String, incorrect_answers: [String], difficulty: String, type: String, category: ID): Game
+
+        removeQuestion(gameId: ID!, questionId: ID!): Game
 
         login(username: String!, password: String!): Auth
     }
