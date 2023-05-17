@@ -92,6 +92,19 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
     //    updateQuestion?
+        removeQuestion: async (parent, { gameId, questionId }, context) => {
+            if (context.user) {
+                return Game.findOneAndUpdate(
+                    { _id: gameId },
+                    { $pull: { 
+                        questions: { _id: questionId }
+                    } },
+                    { new: true }
+                );
+            } 
+
+            throw new AuthenticationError("You need to be logged in to edit your game.")
+        },
         login: async (parent, { username, password }) => {
             const user = await User.findOne({ username });
 
