@@ -69,6 +69,7 @@ const typeDefs = gql`
 
         login(username: String!, password: String!): Auth
     }
+    
 `;
 
 module.exports = typeDefs;
